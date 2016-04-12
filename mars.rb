@@ -2,32 +2,32 @@ puts "Co-ordinates of Plateau end"
 max_x, max_y = gets.split.map!{|num| num.to_i}
 
 puts "Enter starting position of Rover"
-start_pos = gets.split
-curr_dir = start_pos[-1].upcase
+start_position = gets.split
+rover_angle = start_position[-1].upcase
 
-x,y = start_pos[0..1].map!{|num| num.to_i}
+x,y = start_position[0..1].map!{|num| num.to_i}
 
 puts "Enter the moves for Rover"
-moves = gets.chomp.split('')
+rover_moves = gets.chomp.split('')
 
-def dir_update move, curr_dir
-    if curr_dir == 'N'
-        return curr_dir = 'W' if move == 'L'
-        return curr_dir = 'E' if move == 'R'
-    elsif curr_dir == 'E'
-        return curr_dir = 'N' if move == 'L'
-        return curr_dir = 'S' if move == 'R'
-    elsif curr_dir == 'S'
-        return curr_dir = 'E' if move == 'L'
-        return curr_dir = 'W' if move == 'R'
-    elsif curr_dir == 'W'
-        return curr_dir = 'S' if move == 'L'
-        return curr_dir = 'N' if move == 'R'                
+def update_rover_angle move, rover_angle
+    if rover_angle == 'N'
+        return rover_angle = 'W' if move == 'L'
+        return rover_angle = 'E' if move == 'R'
+    elsif rover_angle == 'E'
+        return rover_angle = 'N' if move == 'L'
+        return rover_angle = 'S' if move == 'R'
+    elsif rover_angle == 'S'
+        return rover_angle = 'E' if move == 'L'
+        return rover_angle = 'W' if move == 'R'
+    elsif rover_angle == 'W'
+        return rover_angle = 'S' if move == 'L'
+        return rover_angle = 'N' if move == 'R'                
     end
 end
 
-def move_update move, x, y, curr_dir
-    case curr_dir
+def move_update move, x, y, rover_angle
+    case rover_angle
         when 'N'
         return x, y+1
         when 'E'
@@ -39,14 +39,14 @@ def move_update move, x, y, curr_dir
     end
 end
 
-moves.each do |move|
+rover_moves.each do |move|
     if move == 'M'
-        x,y = move_update move, x, y, curr_dir
+        x,y = move_update move, x, y, rover_angle
         raise ArgumentError, "Rover is out of the Plateau" if x > max_x or y > max_y
     elsif move == 'L' or move == 'R' 
-        curr_dir = dir_update move, curr_dir
+        rover_angle = update_rover_angle move, rover_angle
     else
         raise ArgumentError, "Wrong input for Rover movement"
     end
 end
-puts "\n\n#{x}  #{y}  #{curr_dir}"
+puts "\n#{x}  #{y}  #{rover_angle}\n"
