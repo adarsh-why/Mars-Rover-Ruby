@@ -53,12 +53,11 @@ LMLMLMLMM
 
 Expected Output:
 
-#######1 3 N 
+#####1 3 N 
 
 ==================
 
-Test Input 2 :
------------
+Test Input 2
 
 5 5
 
@@ -68,6 +67,6 @@ MMRMMRMRRM
 
 Expected Output:
 
-#######5 1 E
+#####5 1 E
 
 ==================
